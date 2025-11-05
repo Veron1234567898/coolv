@@ -2123,88 +2123,78 @@ from datetime import timedelta, datetime
 
 from datetime import datetime, timedelta
 
-@AdminRoute.route("/manage-users/<int:userid>/manage-currency", methods=['GET', 'POST'])
+AdminRoute.route("/manage-users/<int:userid>/manage-currency", methods=['GET', 'POST'])
 def ManageUserCurrency(userid: int):
     AdminPermissionRequired('ManageUsers')
-
+    
     userObj: User = User.query.filter_by(id=userid).first()
     if userObj is None:
         return abort(404)
-
-    # Check if the request is for a Builders Club update first
+    
+    if request.method == 'GET':
+        return render_template("admin/usermanage/managecurrency.html", userObj=userObj)
+    
     bc_type = request.form.get("bc_type")
-    bc_duration = request.form.get("bc_duration", 0)
-
+    
     if bc_type:
-        # Handle Builders Club Change
-        if bc_type == "none":
-            # Removing Builders Club by setting expiration to 1 day
-            RemoveUserMembership(userObj.id)
-            flash("Successfully removed Builders Club from the user", "success")
-        elif bc_type in ["classic", "turbo", "outrageous"]:
-            # Mapping the bc_type to the correct MembershipType enum
-            membership_map = {
-                "classic": MembershipType.BuildersClub,
-                "turbo": MembershipType.TurboBuildersClub,
-                "outrageous": MembershipType.OutrageousBuildersClub
-            }
+        return handle_builders_club_update(userObj, bc_type, request.form.get("bc_duration", 0))
+    
+    return handle_currency_update(userObj)
 
-            membership_type = membership_map.get(bc_type)
-            if membership_type:
-                # First, clear the user's current membership to avoid the ExecValue error
-                RemoveUserMembership(userObj.id)
 
-                # Ensure bc_duration is an integer
-                try:
-                    bc_duration = int(bc_duration)  # Cast to integer just to be safe
-                except ValueError:
-                    flash("Invalid Builders Club duration", "danger")
-                    return redirect(request.url)
-
-                # Now, apply the new membership
-                expiration_date = datetime.utcnow() + timedelta(days=bc_duration)  # Add timedelta
-                GiveUserMembership(userObj.id, membership_type, expiration=int(bc_duration))
-                flash(f"Successfully updated Builders Club to {bc_type.capitalize()} for {userObj.username}", "success")
-            else:
-                flash("Invalid Builders Club type selected", "danger")
-        
-        # After handling Builders Club, redirect to avoid running Robux logic
+def handle_builders_club_update(user: User, bc_type: str, bc_duration: str):
+    if bc_type == "none":
+        RemoveUserMembership(user.id)
+        flash("Successfully removed Builders Club from the user", "success")
         return redirect(request.url)
-
-    # Only proceed with the Robux logic if no Builders Club action was taken
-    if request.method == 'POST':
-        amount = request.form.get("amount", 0)
-        currency_type = request.form.get("currency_type", "robux")  # Default to robux
-        try:
-            amount = int(amount)
-        except ValueError:
-            flash("Invalid amount entered", "danger")
-            return redirect(request.url)
-
-        if amount == 0:
-            flash("Amount must not be zero", "warning")
-            return redirect(request.url)
-
-        if currency_type == "tix":
-            if amount > 0:
-                economy.IncrementTargetBalance(userObj, amount, 1)
-                flash(f"Successfully added {amount} Tix to {userObj.username}", "success")
-            else:
-                economy.DecrementTargetBalance(userObj, abs(amount), 1)
-                flash(f"Successfully removed {abs(amount)} Tix from {userObj.username}", "success")
-        else:
-            if amount > 0:
-                economy.IncrementTargetBalance(userObj, amount, 0)
-                flash(f"Successfully added {amount} Robux to {userObj.username}", "success")
-            else:
-                economy.DecrementTargetBalance(userObj, abs(amount), 0)
-                flash(f"Successfully removed {abs(amount)} Robux from {userObj.username}", "success")
-
+    
+    membership_map = {
+        "classic": MembershipType.BuildersClub,
+        "turbo": MembershipType.TurboBuildersClub,
+        "outrageous": MembershipType.OutrageousBuildersClub
+    }
+    
+    membership_type = membership_map.get(bc_type)
+    if not membership_type:
+        flash("Invalid Builders Club type selected", "danger")
         return redirect(request.url)
+    
+    try:
+        duration_days = int(bc_duration)
+    except ValueError:
+        flash("Invalid Builders Club duration", "danger")
+        return redirect(request.url)
+    
+    RemoveUserMembership(user.id)
+    GiveUserMembership(user.id, membership_type, expiration=duration_days)
+    flash(f"Successfully updated Builders Club to {bc_type.capitalize()} for {user.username}", "success")
+    
+    return redirect(request.url)
 
 
-    return render_template("admin/usermanage/managecurrency.html", userObj=userObj)
-
+def handle_currency_update(user: User):
+    try:
+        amount = int(request.form.get("amount", 0))
+    except ValueError:
+        flash("Invalid amount entered", "danger")
+        return redirect(request.url)
+    
+    if amount == 0:
+        flash("Amount must not be zero", "warning")
+        return redirect(request.url)
+    
+    currency_type = request.form.get("currency_type", "robux")
+    currency_id = 1 if currency_type == "tix" else 0
+    currency_name = "Tix" if currency_type == "tix" else "Robux"
+    
+    if amount > 0:
+        economy.IncrementTargetBalance(user, amount, currency_id)
+        flash(f"Successfully added {amount} {currency_name} to {user.username}", "success")
+    else:
+        economy.DecrementTargetBalance(user, abs(amount), currency_id)
+        flash(f"Successfully removed {abs(amount)} {currency_name} from {user.username}", "success")
+    
+    return redirect(request.url)
 
 @AdminRoute.route("/manage-users/<int:userid>/moderator-notes", methods=['GET'])
 def ViewUserModeratorNotes( userid : int ):
