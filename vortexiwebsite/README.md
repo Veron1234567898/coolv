@@ -3,13 +3,11 @@
  - Linux Server ( For Production environment )
  - PostgreSQL Serverx
  - Redis Server
- - NGINX
- - Cloudflare Account
- - Domain with Cloudflare protection
  - Python 3.12+
  - FFmpeg
  - Gunicorn 
-
+ - A webserver which supports reverse proxies
+   
 > Note: These are the bare minimum needed for Vortexi Backend to run, please do not attempt to host a publicly accessible version of Vortexi if you do not know what you are doing
 
 ### Optional Services
@@ -93,5 +91,54 @@ create_admin_user()
 This will create an admin user with all existing admin privileges
 
 Now we can finally start the website, please make sure you have [gunicorn](https://gunicorn.org/) installed on your Linux Machine, gunicorn does not support Windows Machines. To start run the shell script `./start.sh` which will start a webserver on port `3003`. Please make sure you have NGINX configured as a reverse proxy to proxy the website and also have configured Cloudflare to serve your website on the main and all subdomains.
+
+## Setting up reverse proxies (Caddy)
+
+Setting up a Reverse Proxy with Caddy is quite easy.
+
+Please go into your Caddyfile and add this (replace the domains with your domain)
+
+```
+yourdomain.here {
+        reverse_proxy localhost:8000
+}
+*.yourdomain.here {
+        reverse_proxy localhost:8000
+}
+```
+^^ also note that u may need to change the port in the reverse proxy config.
+
+## Setting up reverse proxies (Apache2)
+
+ Here is an example config for KittyBlox ([kittys.rip(https://kittys.rip)]
+ ```
+<VirtualHost *:80>
+    ServerName kittys.rip
+    ServerAlias *.kittys.rip
+    ProxyPreserveHost On
+    ProxyRequests Off
+    <Proxy *>
+        Require all granted
+    </Proxy>
+    ProxyErrorOverride off
+    Alias /500.html /var/www/500.html
+    <Directory "/var/www">
+        Require all granted
+    </Directory>
+    ProxyPass /500.html !
+    ProxyPass / http://127.0.0.1:3003/
+    ProxyPassReverse / http://127.0.0.1:3003/
+    RewriteEngine On
+    RewriteCond %{HTTP:Upgrade} =websocket [NC]
+    RewriteRule /(.*) ws://127.0.0.1:3003/$1 [P,L]
+    ErrorDocument 500 /500.html
+    ErrorDocument 502 /500.html
+    ErrorDocument 503 /500.html
+    ErrorDocument 504 /500.html
+    LimitRequestBody 209715200
+    DocumentRoot /var/www
+</VirtualHost>```
+
+This includes stuff for custom 500 pages if the site goes down, etc. feel free to modify all of this :3
 
 If you are running a Windows Machine and want to run in debug mode run `flask run --port 3006 --debug`, this will open the website on port 3006
