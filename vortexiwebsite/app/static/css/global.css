@@ -64,7 +64,7 @@ body {
 }
 
 #websitewidemessage {
-    background-color: rgb(255, 136, 0);
+    background-color: #f5a9b8;
 }
 
 #websitewidemessage p {
@@ -124,28 +124,23 @@ body {
 @media (max-width: 992px) {
     .sidebar {
         position: fixed;
-        /* fixed so it overlays content */
         top: 0;
         left: -250px;
-        /* hidden by default */
         width: 250px;
         height: 100vh;
-        background-color: #1a1a1a;
+        background-color: #131d23;
         overflow-y: auto;
         z-index: 1050;
-        /* high z-index to overlay content */
         transition: left 0.3s ease;
         padding-top: 60px;
     }
 
     .sidebar.show {
         left: 0 !important;
-        /* slide in */
     }
 
     .main-content {
         margin-left: 0 !important;
-        /* ensure full width */
     }
 }
 
@@ -155,8 +150,7 @@ body {
     left: 0;
     right: 0;
     z-index: 1100;
-    /* above sidebar */
-    background-color: #1a1a1a;
+    background-color: #131d23;
     padding: 0.5rem 1rem;
 }
 

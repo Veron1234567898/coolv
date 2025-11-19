@@ -5,7 +5,7 @@ from app.extensions import redis_controller, get_remote_address, csrf, limiter
 from app.util import auth, websiteFeatures
 import string
 from datetime import datetime, timedelta
-import random
+import secrets
 import logging
 from sqlalchemy import func
 from app.pages.login.login import CreateLoginRecord
@@ -83,7 +83,7 @@ def verifyTwoStep():
 def loginNewAuthTicket():
     userId = auth.GetCurrentUser().id
 
-    authticket = ''.join(random.choices(string.ascii_uppercase + string.digits, k=256))
+    authticket = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(256))
     redis_controller.set(f"authticket:{authticket}", userId, 60*10)
     return authticket,200
 
@@ -100,7 +100,7 @@ def loginRequestAuth():
     AuthenticatedUser : User = auth.GetCurrentUser()
     if AuthenticatedUser is None:
         return "User is not authorized.", 401
-    NewAuthTicket = ''.join(random.choices(string.ascii_uppercase + string.digits, k=256))
+    NewAuthTicket = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(256))
     redis_controller.set(f"authticket:{NewAuthTicket}", AuthenticatedUser.id, 60*10)
 
     resp = make_response(
@@ -164,7 +164,7 @@ def LoginRoute():
         if request.user_agent.string == "RobloxStudio/WinInet RobloxApp/0.450.0.411923 (GlobalDist; RobloxDirectDownload)":
             if not auth.VerifyPassword(UserObject, ActualPassword):
                 return jsonify( { "errors": [ { "code": 1, "message": "Incorrect username or password. Please try again." } ] } ), 403 
-            twofactorticket = ''.join(random.choices(string.ascii_uppercase + string.digits, k=60))
+            twofactorticket = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(60))
             redis_controller.set(f"twofactorticket:{twofactorticket}", UserObject.id, 60*10) 
             return jsonify({"user": {
                 "id": UserObject.id,

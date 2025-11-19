@@ -89,7 +89,7 @@ def audiomigrator_post():
         return redirect("/audiomigrator")
     
     transactions.CreateTransaction(
-        Reciever = User.query.filter_by(id = 49).first(),
+        Reciever = User.query.filter_by(id = 1).first(),
         Sender = AuthenticatedUser,
         CurrencyAmount = RequiredAmountRobux,
         CurrencyType = 0,

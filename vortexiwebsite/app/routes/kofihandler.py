@@ -8,7 +8,7 @@ from app.models.kofi_transaction import KofiTransaction
 from app.extensions import db, csrf
 import requests
 import datetime
-import random
+import secrets
 import string
 from requests.auth import HTTPBasicAuth
 from config import Config
@@ -20,7 +20,7 @@ KofiHandlerRoute = Blueprint("kofihandler", __name__, template_folder="pages")
 def GenerateCode():
     Code = ""
     for i in range(0, 5):
-        Chunk = ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
+        Chunk = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(5))
         Code += Chunk
         if i != 4:
             Code += "-"

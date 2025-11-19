@@ -2,7 +2,7 @@
 {% block title %}Login{% endblock %}
 {% block head %}
 <meta content="Vortexi" property="og:title" />
-<meta content="experience 2016+ with freedom" property="og:description" />
+<meta content="relive childhood memories with freedom" property="og:description" />
 <meta content="https://vortexi.cc" property="og:url" />
 <meta content="#00000" data-react-helmet="true" name="theme-color" />
 <style>
@@ -28,12 +28,31 @@
 .alert{border-radius:6px;padding:10px;margin-bottom:15px;text-align:center}
 .alert-danger{background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);color:#ef4444}
 .alert-success{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#22c55e}
+body {
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.navbar,
+.sidebar,
+#websitewidemessage,
+.subnav-bar,
+#footer {
+  display: none !important;
+}
+.auth-container {
+  min-height: 100vh;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
 </style>
 
 <div class="auth-container">
   <div class="auth-box">
-    <center><h1>VORTEXI</h1>
-    <p>experience 2016+ with <b>freedom</b></p></center>
+    <center><h1 class="title-logo-lander">VORTEXI</h1>
+    <p>relive childhood memories with <b>freedom</b></p></center>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <div>
@@ -59,20 +78,6 @@
     <img src="/static/img/LoginImage2.png" alt="Login Image">
   </div>
 </div>
-<script>
-  // sometimes, you should stop skidding.
-  window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
-      if (link.href.includes('/static/css/header.css?v4')) {
-        link.remove();
-      }
-    });
 
-    const messageElement = document.getElementById('websitewidemessage');
-    if (messageElement) {
-      messageElement.remove();
-    }
-  });
-</script>
 
 {% endblock %}

@@ -2,8 +2,7 @@ import hashlib
 import logging
 import time
 import string
-import random
-import uuid
+import secrets
 import pyotp
 
 from argon2 import PasswordHasher
@@ -61,8 +60,7 @@ def GetTokenInfo( token : str ) -> list:
     return TokenInfo
 
 def CreateToken( userid : int , ip, expireIn : int = (60 * 60 * 24 * 31)) -> str:
-    random.seed(str(uuid.uuid4()))
-    Token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(512))
+    Token = ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(512))
 
     # Token Info Format
     # userid|created|expiry|ip

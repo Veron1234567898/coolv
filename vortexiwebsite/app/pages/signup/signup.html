@@ -27,12 +27,31 @@
 #checkboxTerms input{margin:5px 10px 0 0;width:16px;height:16px}
 #checkboxTerms p{margin:0;font-size:0.9rem}
 .cf-turnstile{margin:0 auto 15px;display:table}
+body {
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.navbar,
+.sidebar,
+#websitewidemessage,
+.subnav-bar,
+#footer {
+  display: none !important;
+}
+.auth-container {
+  min-height: 100vh;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
 </style>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <div class="auth-container">
   <div class="auth-box">
-    <center><h1>VORTEXI</h1>
-    <p>experience 2016+ with <b>freedom</b></p></center>
+    <center><h1 class="title-logo-lander">VORTEXI</h1>
+    <p>relive childhood memories with <b>freedom</b></p></center>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <div>
@@ -65,19 +84,5 @@
     <img src="/static/img/LoginImage2.png" alt="Signup Image">
   </div>
 </div>
-<script>
-  // sometimes, you should stop skidding.
-  window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
-      if (link.href.includes('/static/css/header.css?v4')) {
-        link.remove()
-      }
-    });
-  });
-  const messageElement = document.getElementById('websitewidemessage')
-  if (messageElement) {
-    messageElement.remove();
-  }
-  </script>
   
 {% endblock %}

@@ -18,6 +18,24 @@
 .alert-danger{background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);color:#ef4444}
 .alert-success{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#22c55e}
 .cf-turnstile{margin:0 auto 15px;display:table}
+body {
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.navbar,
+.sidebar,
+.subnav-bar,
+#footer,
+#websitewidemessage {
+  display: none !important;
+}
+
+.main-content {
+  margin-left: 0 !important;
+  padding: 0 !important;
+}
 </style>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 {% endblock %}
@@ -49,14 +67,5 @@
     </div>
   </div>
 </div>
-<script>
-  // sometimes, you should stop skidding.
-  window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
-      if (link.href.includes('/static/css/header.css?v4')) {
-        link.remove()
-      }
-    });
-  });
-  </script>
+
 {% endblock %}

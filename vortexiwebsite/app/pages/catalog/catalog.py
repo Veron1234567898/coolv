@@ -155,7 +155,7 @@ def catalog_page():
             AssetType.BackAccessory,
             AssetType.WaistAccessory,
             AssetType.Package
-        ))).filter(and_(Asset.creator_id.in_([1, 49]), Asset.creator_type == 0)).filter(or_(
+        ))).filter(and_(Asset.creator_id.in_([1]), Asset.creator_type == 0)).filter(or_(
             Asset.is_for_sale == True, Asset.is_limited == True
         )),
         1: lambda queryObj: queryObj.filter(Asset.asset_type.in_((
@@ -167,11 +167,11 @@ def catalog_page():
             AssetType.FrontAccessory,
             AssetType.BackAccessory,
             AssetType.WaistAccessory,
-        ))).filter(and_(Asset.creator_id.in_([1, 49]), Asset.creator_type == 0)).filter(or_(
+        ))).filter(and_(Asset.creator_id.in_([1]), Asset.creator_type == 0)).filter(or_(
             Asset.is_for_sale == True, Asset.is_limited == True
         )),
-        2: lambda queryObj: queryObj.filter(Asset.asset_type == AssetType.Gear).filter(and_(Asset.creator_id.in_([1, 49]), Asset.creator_type == 0, Asset.is_for_sale == True)),
-        3: lambda queryObj: queryObj.filter(Asset.asset_type == AssetType.Face).filter(and_(Asset.creator_id.in_([1, 49]), Asset.creator_type == 0, Asset.is_for_sale == True)),
+        2: lambda queryObj: queryObj.filter(Asset.asset_type == AssetType.Gear).filter(and_(Asset.creator_id.in_([1]), Asset.creator_type == 0, Asset.is_for_sale == True)),
+        3: lambda queryObj: queryObj.filter(Asset.asset_type == AssetType.Face).filter(and_(Asset.creator_id.in_([1]), Asset.creator_type == 0, Asset.is_for_sale == True)),
         4: lambda queryObj: queryObj.filter_by(is_limited = True),
         5: lambda queryObj: queryObj.filter(Asset.asset_type.in_((
             AssetType.Hat,

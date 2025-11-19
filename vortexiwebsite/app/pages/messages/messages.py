@@ -18,7 +18,7 @@ def CreateSystemMessage( subject : str, message : str, userid : int ):
     NewMessage : Message = Message(
         subject=subject,
         content=message,
-        sender_id=49,
+        sender_id=1,
         recipient_id=userid
     )
     db.session.add(NewMessage)

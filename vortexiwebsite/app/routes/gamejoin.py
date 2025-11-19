@@ -7,6 +7,7 @@ import time
 from config import Config
 import json
 from datetime import datetime, timedelta
+import secrets
 import random
 import string
 import logging
@@ -422,7 +423,7 @@ def placelauncher():
     authenticatedTicketUUID = str(uuid.uuid4())
     redis_controller.setex(f"place:{placeid}:ticket:{authenticatedTicketUUID}", 60, json.dumps({"id": userId, "jobid": str(PlaceServerObj.serveruuid)}))
 
-    authticket = ''.join(random.choices(string.ascii_uppercase + string.digits, k=256))
+    authticket = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(256))
     redis_controller.set(f"authticket:{authticket}", userId, 60*10)
     resp = make_response(jsonify({
         "jobId": PlaceServerObj.serveruuid,

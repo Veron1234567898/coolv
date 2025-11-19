@@ -8,7 +8,7 @@ from app.extensions import redis_controller, get_remote_address, csrf, limiter, 
 from app.enums.PlaceYear import PlaceYear
 from app.routes.gamejoin import CreateNewPlaceServer
 import logging
-import random
+import secrets
 import string
 
 TeleportServiceRoute = Blueprint('teleportServiceinternal', __name__, url_prefix='/reservedservers')
@@ -72,7 +72,7 @@ def create_reserved_server():
         return "Invalid request", 400
 
     CooldownKeyName = f"reserved_server_creation_cooldown:{OriginPlaceObj.parent_universe_id}"
-    ReservedServerAccessCode = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(64))
+    ReservedServerAccessCode = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(64))
     
     if not redis_controller.exists( CooldownKeyName ):
         redis_controller.setex( name = CooldownKeyName, time = 10, value = "1" )

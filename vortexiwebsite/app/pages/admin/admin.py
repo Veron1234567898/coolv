@@ -11,10 +11,10 @@ import hashlib
 import os
 import requests
 import logging
+import secrets
 import random
 import time
 import threading
-import random
 import string
 from sqlalchemy import or_, and_, func
 from config import Config
@@ -230,7 +230,7 @@ def gameservers_refresh_accesskey(serverid):
     if request.method == "GET":
         return render_template("admin/gameservers/refresh_accesskey.html", gameserver = GameServerObj)
     else:
-        NewAccessKey = ''.join(random.choices(string.ascii_letters + string.digits, k=random.randint(60, 90)))
+        NewAccessKey = ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(secrets.choice(range(60, 91))))
         req_response = gameserver_comm.perform_post(
             TargetGameserver = GameServerObj,
             Endpoint = "ResetAccessKeyAndRestart",
@@ -337,7 +337,7 @@ def fflags_import(groupid: int):
         return redirect(f"/admin/fflags/{str(groupid)}")
     
     try:
-        json.loads(file.read())
+        json.loads(file.read(2000000)) # no worker freezing (2mb limit)
     except:
         flash("Invalid JSON file", "danger")
         return redirect(f"/admin/fflags/{str(groupid)}")
@@ -464,13 +464,14 @@ def asset_copier_post():
     if AssetURL == "":
         flash("URL is empty", "danger")
         return redirect("/admin/asset-copier")
-    AssetRegex = re.compile(r".com\/catalog\/(\d+)\/")
+    AssetRegex = re.compile(r"https?://([a-z0-9-]+\.)*roblox\.com/catalog/(\d+)/") # makes sure the host is roblox, can be www.roblox.com or roblox.com or web.roblox.com etc etc
     AssetMatch = AssetRegex.search(request.form.get("asseturl"))
     if AssetMatch is None:
         flash("Invalid asset URL", "error")
         return redirect("/admin/asset-copier")
     AssetID = AssetMatch.group(1)
     # Check if asset exists
+    if not AssetID.isdigit(): abort(400) # prevent potential dos
     AssetObj = Asset.query.filter_by(roblox_asset_id=int(AssetID)).first()
     if AssetObj is not None:
         return redirect(f"/admin/manage-assets/{str(AssetObj.id)}")
@@ -483,7 +484,7 @@ def asset_copier_post():
     redis_controller.set(f"asset_migration_cooldown_{str(AuthenticatedUser.id)}", "1", 20)
 
     # Migrate asset
-    NewAsset : Asset = migrateAsset(int(AssetID), forceMigration=False, allowedTypes=[2, 8, 11, 12, 17, 18, 19, 41, 42, 43, 44, 45, 46, 47], creatorId=49, keepRobloxId=False, migrateInfo=True)
+    NewAsset : Asset = migrateAsset(int(AssetID), forceMigration=False, allowedTypes=[2, 8, 11, 12, 17, 18, 19, 41, 42, 43, 44, 45, 46, 47], creatorId=1, keepRobloxId=False, migrateInfo=True)
     if NewAsset is None:
         flash("Failed to migrate asset", "danger")
         return redirect("/admin/asset-copier")
@@ -1057,7 +1058,8 @@ def LogModerationAction(
                     "username": "Vortexi - Moderation Logs",
                     "embeds": [embed],
                     "avatar_url": f"https://www.vortexi.cc/Thumbs/Head.ashx?x=48&y=48&userId={str(Actor.id)}"
-                }
+                },
+                timeout = 15 # without timeout the thread will hang if request hangs
             )
         except Exception as e:
             logging.warn(f"Admin > LogModerationAction: Exception raised when sending webhook - {str(e)}")
@@ -1716,7 +1718,8 @@ def LogUserBanAction( BannedUser : User, Actor : User, BanObject : UserBan ):
                     "username": "Vortexi - Moderation Logs",
                     "embeds": [BanEmbed],
                     "avatar_url": f"https://www.vortexi.cc/Thumbs/Head.ashx?x=48&y=48&userId={str(BannedUser.id)}"
-                }
+                },
+                timeout = 15 # without timeout the thread will hang if request hangs
             )
         except Exception as e:
             logging.warn(f"Admin > LogUserBanAction: Exception raised when sending webhook - {str(e)}")
@@ -1785,7 +1788,8 @@ def LogUserUnbanAction( TargetUser : User, Actor : User, BanObj : UserBan ):
                     "username": "Vortexi - Moderation Logs",
                     "embeds": [BanEmbed],
                     "avatar_url": f"https://www.vortexi.cc/Thumbs/Head.ashx?x=48&y=48&userId={str(TargetUser.id)}"
-                }
+                },
+                timeout = 15 # without timeout the thread will hang if request hangs
             )
         except Exception as e:
             logging.warn(f"Admin > LogUserUnbanAction: Exception raised when sending webhook - {str(e)}")
@@ -2351,7 +2355,7 @@ def CreateGiftcardPost():
 
     if GiftcardTypeInput in [GiftcardType.RobuxCurrency, GiftcardType.TixCurrency]:
         AuthenticatedUser : User = auth.GetCurrentUser()
-        if GiftcardValue > 100000000 and AuthenticatedUser.id not in (1, 49):
+        if GiftcardValue > 100000000 and AuthenticatedUser.id not in (1):
             flash("Giftcard value must be at most 100000000 (why do u want that much wtf??)", "error")
             return redirect("/admin/create-giftcard")
     elif GiftcardTypeInput in [GiftcardType.Outrageous_BuildersClub, GiftcardType.Turbo_BuildersClub]:
@@ -2377,7 +2381,7 @@ def CreateGiftcardPost():
     def GenerateCode():
         Code = ""
         for i in range(0, 5):
-            Chunk = ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
+            Chunk = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(5))
             Code += Chunk
             if i != 4:
                 Code += "-"
@@ -2413,11 +2417,11 @@ def UpdateAssetFilePost():
     if AssetObj is None:
         flash("Invalid asset", "error")
         return redirect("/admin/update-asset-file")
-    if AssetObj.creator_id not in [1,49] or AssetObj.creator_type != 0:
+    if AssetObj.creator_id not in [1] or AssetObj.creator_type != 0:
         flash("Asset is not owned by Vortexi", "error")
         return redirect("/admin/update-asset-file")
     if AssetObj.asset_type not in [AssetType(1), AssetType(2), AssetType(3), AssetType(4), AssetType(8), AssetType(11), AssetType(12), AssetType(17), AssetType(18), AssetType(19), AssetType(24), AssetType(27), AssetType(28), AssetType(29), AssetType(30), AssetType(31), AssetType(32), AssetType(41), AssetType(42), AssetType(43), AssetType(44), AssetType(45), AssetType(46), AssetType(47), AssetType(57), AssetType(58)]:
-        if AuthenticatedUser.id not in (1, 49):
+        if AuthenticatedUser.id not in (1):
             flash("You are not allowed to update this type of asset", "error")
             return redirect("/admin/update-asset-file")
     
@@ -2526,7 +2530,7 @@ def CreateAssetPost():
 
     NewAssetObj : Asset = Asset(
         name = AssetName,
-        creator_id = 49,
+        creator_id = 1,
         creator_type = 0,
         asset_type = AssetTypeInput,
         created_at = datetime.utcnow(),
@@ -2639,7 +2643,8 @@ def LogAssetModerationAction( Actor : User, AssetObj : Asset ):
                     "username": "Vortexi - Moderation Logs",
                     "embeds" : [EmbedObj],
                     "avatar_url": f"https://www.vortexi.cc/Thumbs/Head.ashx?x=48&y=48&userId={str(Actor.id)}"
-                }
+                },
+                timeout = 15 # without timeout the thread will hang if request hangs
             )
         except Exception as e:
             logging.warn(f"Admin > LogAssetModerationAction: Exception raised when sending webhook - {str(e)}")

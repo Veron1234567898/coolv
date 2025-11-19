@@ -3,20 +3,32 @@
 
 <head>
   <!--[if IE 6]>
-  © COPYRIGHT 2025 VORTEXI.CC, ARIEZ & KUROMI :3
-  DO NOT COPY, MODIFY, OR REDISTRIBUTE THIS CODE
-  WITHOUT PERMISSION FROM VORTEXI.CC
-  SKIDDING ISNT VERY KAWAII!
-  Site made by kuromi (kuromi.cat)
-  PAGE GENERATED AT : {{ datetime_utcnow() }} UTC
-<![endif]--><style>
-  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+  trans rights are human rights!
+  kaitlyn was here ;)
+  view the source for this at https://github.com/ariezmeoww/vortexi-src
+<![endif]-->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-* {
-    font-family: "Outfit", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-}</style>
+    * {
+      font-family: "Outfit", sans-serif;
+      font-optical-sizing: auto;
+      font-style: normal;
+    }
+
+    img.emoji {
+      height: 1em;
+      width: 1em;
+      margin: 0 .05em 0 .1em;
+      vertical-align: -0.1em;
+    }
+
+.main-content {
+  margin-top: -50px !important;
+}
+
+
+  </style>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/static/img/vortex.ico" type="image/x-icon" />
@@ -25,18 +37,11 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
     crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7P5LY26BKG"></script>
+  <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <link href="/static/css/global.css" rel="stylesheet" />
-  <link href="/static/css/header.css?v4" rel="stylesheet" />
-  <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-7P5LY26BKG');</script>
-  <script type="text/javascript">
-    (function (c, l, a, r, i, t, y) {
-      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-    })(window, document, "clarity", "script", "r7o7gykqz0");
-  </script>
+  <link href="/static/css/header.css?random={{ BuildVersionDontGetThisMixedUpCuh }}" rel="stylesheet" />
   {% if currentuser: %}
   <script src="/static/js/presence.js"></script>{% endif %}
 
@@ -81,8 +86,7 @@
           {% endif %}
         </a>
         <a href="/download" class="nav-link"><i class="bi bi-download"></i> Downloads</a>
-        <a href="/discourse/" class="nav-link"><i class="bi bi-chat-square-text-fill"></i> Forums</a>
-        <a href="https://discord.gg/spUbRdSa5J" class="nav-link"><i class="bi bi-discord"></i> Discord</a>
+        <a href="https://discord.gg/REPLACEME" class="nav-link"><i class="bi bi-discord"></i> Discord</a>
         {% if currentuser.is_admin: %}
         <a href="/admin/" class="nav-link">
           <i class="bi bi-shield-fill"></i> Admin Panel
@@ -100,7 +104,7 @@
             <i class="bi bi-list fs-4"></i>
           </button>
           <a class="navbar-brand" href="/home">
-            <h1 class="title-logo">VORTEXI</h1>
+            <h1 class="title-logo">Vortexi</h1>
           </a>
         </div>
 
@@ -157,9 +161,7 @@
       <a href="/trade">Trades{% if currentuser.inbound_trades > 0: %}<span
           class="badge text-bg-danger ms-1">{{currentuser.inbound_trades}}</span>{%endif%}</a>
       <a href="/download">Downloads</a>
-      <!--<a href="/discourse/">Forums</a>-->
-      <!-- <a href="https://synmons.com">Synmons</a> -->
-      <a href="https://discord.gg/spUbRdSa5J">Discord</a>
+      <a href="https://discord.gg/REPLACEME">Discord</a>
       {% if currentuser.is_admin: %}
       <a href="/admin/">Admin Panel{% if currentuser.pending_asset_count > 0: %}<span
           class="badge text-bg-danger ms-1">{{currentuser.pending_asset_count}}</span>{%endif%}</a>
@@ -175,37 +177,8 @@
   <div class="main-content">
     {% block content %}{% endblock %}
   </div>
-  {% if currentuser: %}
-  <div id="footer">
-    <div class="container pt-4 pb-4">
-      <div class="row">
-        <div class="col">
-          <b>© 2025 Vortexi</b><br>
-          <b>Node: phx.vortexi.cc</b><br>
-          <b>Build: {{ BuildVersionDontGetThisMixedUpCuh }} (production)</b>
-          <p>Vortexi is not affiliated or related to the Roblox Corporation or any of its subsidaries.</p>
-        </div>
-        <div class="col" id="footerlist">
-          <a href="/terms">Terms of Service</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="https://discord.gg/spUbRdSa5J">Discord</a>
-        </div>
-        <div class="col" id="footerlist">
-          <a href="/home">Home</a>
-          <a href="/games">Games</a>
-          <a href="/catalog">Catalog</a>
-          <a href="/develop">Develop</a>
-        </div>
-        <div class="col" id="footerlist">
-          <a href="/settings">Settings</a>
-          <a href="/currency-exchange">Currency Exchange</a>
-          <a href="/download">Downloads</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endif %}
   <script src="/static/js/global.js" crossorigin="anonymous"></script>
-</body>
+  <script src="/static/js/twemoji.js" crossorigin="anonymous"></script>
 
+</body>
 </html>

@@ -3,20 +3,29 @@
 {% block head %}
 {% endblock %}
 {% block content %}
+<style>
+  body {
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.navbar,
+.sidebar,
+#footer,
+#websitewidemessage,
+.subnav-bar {
+  display: none !important;
+}
+
+.main-content {
+  margin-left: 0 !important;
+  padding: 0 !important;
+}</style>
 <div style="min-height: 100vh;width: 100%;" class="d-flex align-items-center justify-content-center">
     <div class="p-3" style="background-color: rgb(31,31,31);box-shadow: 0px 0px 10px 0px rgb(0,0,0,0.5);">
         <h1>405 Method Not Allowed</h1>
         <p>The method is not allowed for the requested URL.</p>
     </div>
 </div>
-<script>
-    document.querySelectorAll('div.sidebar').forEach(div => {
-  div.remove();
-});
-
-const footer = document.getElementById('footer');
-if (footer) {
-  footer.remove();
-}
-</script>
 {% endblock %}

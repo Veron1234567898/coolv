@@ -646,7 +646,7 @@ def MigrateBundle( bundleId : int ) -> Asset:
                 keepRobloxId = False,
                 throwException = True,
                 assetVersionId=1,
-                creatorId=49
+                creatorId=1
             )
             MigratedAssets.append(assetObj)
             # Check if the package link already exists
