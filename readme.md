@@ -8,6 +8,6 @@ This was made with love by [me](https://kaitlyn.codes).
 
 Get started here: [vortexiwebsite/README.md](vortexiwebsite/README.md)
 
-Any support, please [contact me!](https://kaitlyn.codes)
+Any support, please [contact me](https://kaitlyn.codes) or [copyright.txt on Discord](https://discord.com/users/744379641707626556)!
 
 Good luck, feel free to rehost this!
