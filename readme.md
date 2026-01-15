@@ -11,5 +11,3 @@ Get started here: [vortexiwebsite/README.md](vortexiwebsite/README.md)
 Any support, please [contact me](https://kaitlyn.codes) or [copyright.txt on Discord](https://discord.com/users/744379641707626556)!
 
 Good luck, feel free to rehost this!
-
-If you wanna play Vortexi for whatever reason without either rehosting it yourself or finding a revival that uses it, [here you go](https://vortexi.cc).
