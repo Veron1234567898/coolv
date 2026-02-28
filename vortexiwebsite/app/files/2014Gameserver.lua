@@ -10,8 +10,8 @@ local TempPlaceAccessKey = "{TempPlaceAccessKey}"
 local sleeptime = 1
 local access = "{AuthToken}"
 local JobId = "{JobId}"
-local BaseURL = "http://www.vortexi.cc"
-local BaseDomain = "vortexi.cc"
+local BaseURL = "http://www.kronus.co"
+local BaseDomain = "kronus.co"
 local timeout = 15
 
 local HttpService = game:GetService("HttpService")

@@ -15,30 +15,30 @@ local message = Instance.new("Message")
 message.Parent = workspace
 message.archivable = false
 
-game:GetService("ScriptInformationProvider"):SetAssetUrl("https://www.vortexi.cc/Asset/")
+game:GetService("ScriptInformationProvider"):SetAssetUrl("https://www.kronus.co/Asset/")
 game:GetService("ContentProvider"):SetThreadPool(16)
-pcall(function() game:GetService("InsertService"):SetFreeModelUrl("https://www.vortexi.cc/Game/Tools/InsertAsset.ashx?type=fm&q=%s&pg=%d&rs=%d") end) -- Used for free model search (insert tool)
-pcall(function() game:GetService("InsertService"):SetFreeDecalUrl("https://www.vortexi.cc/Game/Tools/InsertAsset.ashx?type=fd&q=%s&pg=%d&rs=%d") end) -- Used for free decal search (insert tool)
+pcall(function() game:GetService("InsertService"):SetFreeModelUrl("https://www.kronus.co/Game/Tools/InsertAsset.ashx?type=fm&q=%s&pg=%d&rs=%d") end) -- Used for free model search (insert tool)
+pcall(function() game:GetService("InsertService"):SetFreeDecalUrl("https://www.kronus.co/Game/Tools/InsertAsset.ashx?type=fd&q=%s&pg=%d&rs=%d") end) -- Used for free decal search (insert tool)
 
 ifSeleniumThenSetCookie("SeleniumTest2", "Set URL service")
 
 settings().Diagnostics:LegacyScriptMode()
 
-game:GetService("InsertService"):SetBaseSetsUrl("https://www.vortexi.cc/Game/Tools/InsertAsset.ashx?nsets=10&type=base")
-game:GetService("InsertService"):SetUserSetsUrl("https://www.vortexi.cc/Game/Tools/InsertAsset.ashx?nsets=20&type=user&userid=%d")
-game:GetService("InsertService"):SetCollectionUrl("https://www.vortexi.cc/Game/Tools/InsertAsset.ashx?sid=%d")
-game:GetService("InsertService"):SetAssetUrl("https://www.vortexi.cc/Asset/?id=%d")
-game:GetService("InsertService"):SetAssetVersionUrl("https://www.vortexi.cc/Asset/?assetversionid=%d")
+game:GetService("InsertService"):SetBaseSetsUrl("https://www.kronus.co/Game/Tools/InsertAsset.ashx?nsets=10&type=base")
+game:GetService("InsertService"):SetUserSetsUrl("https://www.kronus.co/Game/Tools/InsertAsset.ashx?nsets=20&type=user&userid=%d")
+game:GetService("InsertService"):SetCollectionUrl("https://www.kronus.co/Game/Tools/InsertAsset.ashx?sid=%d")
+game:GetService("InsertService"):SetAssetUrl("https://www.kronus.co/Asset/?id=%d")
+game:GetService("InsertService"):SetAssetVersionUrl("https://www.kronus.co/Asset/?assetversionid=%d")
 
-pcall(function() game:GetService("SocialService"):SetFriendUrl("https://www.vortexi.cc/Game/LuaWebService/HandleSocialRequest.ashx?method=IsFriendsWith&playerid=%d&userid=%d") end)
-pcall(function() game:GetService("SocialService"):SetBestFriendUrl("https://www.vortexi.cc/Game/LuaWebService/HandleSocialRequest.ashx?method=IsBestFriendsWith&playerid=%d&userid=%d") end)
-pcall(function() game:GetService("SocialService"):SetGroupUrl("https://www.vortexi.cc/Game/LuaWebService/HandleSocialRequest.ashx?method=IsInGroup&playerid=%d&groupid=%d") end)
-pcall(function() game:GetService("SocialService"):SetGroupRankUrl("https://www.vortexi.cc/Game/LuaWebService/HandleSocialRequest.ashx?method=GetGroupRank&playerid=%d&groupid=%d") end)
-pcall(function() game:GetService("SocialService"):SetGroupRoleUrl("https://www.vortexi.cc/Game/LuaWebService/HandleSocialRequest.ashx?method=GetGroupRole&playerid=%d&groupid=%d") end)
-pcall(function() game:GetService("GamePassService"):SetPlayerHasPassUrl("https://www.vortexi.cc/Game/GamePass/GamePassHandler.ashx?Action=HasPass&UserID=%d&PassID=%d") end)
-pcall(function() game:GetService("MarketplaceService"):SetProductInfoUrl("https://www.vortexi.cc/marketplace/productinfo?assetId=%d") end)
-pcall(function() game:GetService("MarketplaceService"):SetDevProductInfoUrl("https://www.vortexi.cc/marketplace/productDetails?productId=%d") end)
-pcall(function() game:GetService("MarketplaceService"):SetPlayerOwnsAssetUrl("https://www.vortexi.cc/ownership/hasasset?userId=%d&assetId=%d") end)
+pcall(function() game:GetService("SocialService"):SetFriendUrl("https://www.kronus.co/Game/LuaWebService/HandleSocialRequest.ashx?method=IsFriendsWith&playerid=%d&userid=%d") end)
+pcall(function() game:GetService("SocialService"):SetBestFriendUrl("https://www.kronus.co/Game/LuaWebService/HandleSocialRequest.ashx?method=IsBestFriendsWith&playerid=%d&userid=%d") end)
+pcall(function() game:GetService("SocialService"):SetGroupUrl("https://www.kronus.co/Game/LuaWebService/HandleSocialRequest.ashx?method=IsInGroup&playerid=%d&groupid=%d") end)
+pcall(function() game:GetService("SocialService"):SetGroupRankUrl("https://www.kronus.co/Game/LuaWebService/HandleSocialRequest.ashx?method=GetGroupRank&playerid=%d&groupid=%d") end)
+pcall(function() game:GetService("SocialService"):SetGroupRoleUrl("https://www.kronus.co/Game/LuaWebService/HandleSocialRequest.ashx?method=GetGroupRole&playerid=%d&groupid=%d") end)
+pcall(function() game:GetService("GamePassService"):SetPlayerHasPassUrl("https://www.kronus.co/Game/GamePass/GamePassHandler.ashx?Action=HasPass&UserID=%d&PassID=%d") end)
+pcall(function() game:GetService("MarketplaceService"):SetProductInfoUrl("https://www.kronus.co/marketplace/productinfo?assetId=%d") end)
+pcall(function() game:GetService("MarketplaceService"):SetDevProductInfoUrl("https://www.kronus.co/marketplace/productDetails?productId=%d") end)
+pcall(function() game:GetService("MarketplaceService"):SetPlayerOwnsAssetUrl("https://www.kronus.co/ownership/hasasset?userId=%d&assetId=%d") end)
 pcall(function() game:SetCreatorID(0, Enum.CreatorType.User) end)
 
 ifSeleniumThenSetCookie("SeleniumTest3", "Set creator ID")
@@ -52,7 +52,7 @@ pcall(function() settings().Rendering.EnableFRM = true end)
 pcall(function() settings()["Task Scheduler"].PriorityMethod = Enum.PriorityMethod.AccumulatedError end)
 
 game:GetService("ChangeHistoryService"):SetEnabled(false)
-pcall(function() game:GetService("Players"):SetBuildUserPermissionsUrl("https://www.vortexi.cc/Game/BuildActionPermissionCheck.ashx?assetId=0&userId=%d&isSolo=true") end)
+pcall(function() game:GetService("Players"):SetBuildUserPermissionsUrl("https://www.kronus.co/Game/BuildActionPermissionCheck.ashx?assetId=0&userId=%d&isSolo=true") end)
 
 workspace:SetPhysicsThrottleEnabled(true)
 
@@ -85,7 +85,7 @@ function doVisit()
 
 	message.Text = "Creating Player"
 	player = game:GetService("Players"):CreateLocalPlayer(0)
-	player.CharacterAppearance = "https://www.vortexi.cc/Asset/CharacterFetch.ashx?userId={UserId}&placeId={PlaceId}"
+	player.CharacterAppearance = "https://www.kronus.co/Asset/CharacterFetch.ashx?userId={UserId}&placeId={PlaceId}"
 	local propExists, canAutoLoadChar = false
 	propExists = pcall(function()  canAutoLoadChar = game.Players.CharacterAutoLoads end)
 
@@ -126,7 +126,7 @@ else
 	message.Text = "Error on visit: " .. err
 	if not inStudio then
 		if false then
-			game:HttpPost("https://www.vortexi.cc/Error/Lua.ashx", "Visit.lua: " .. err)
+			game:HttpPost("https://www.kronus.co/Error/Lua.ashx", "Visit.lua: " .. err)
 		end
 	end
 end

@@ -15,7 +15,7 @@ class Config:
     REDIS_CLIENT = redis.Redis(host="127.0.0.1", port=6379, db=0, decode_responses=True)
 
     FLASK_LIMITED_STORAGE_URI : str = "redis://localhost:6379/0"
-    BaseDomain : str = "vortexi.cc"
+    BaseDomain : str = "kronus.co"
     BaseURL : str = f"https://www.{BaseDomain}"
 
     CloudflareTurnstileSiteKey : str = "0x4AAAAAABQup2-ddXh4IHmv"
@@ -34,7 +34,7 @@ class Config:
 
     MAILJET_APIKEY : str = "PleaseReplaceMeOneDay!"
     MAILJET_SECRETKEY : str = "PleaseReplaceMeOneDay!"
-    MAILJET_NOREPLY_SENDER : str = "no-reply@vortexi.cc"
+    MAILJET_NOREPLY_SENDER : str = "no-reply@kronus.co"
     MAILJET_DONATION_TEMPLATE_ID : int = 6984478
     MAILJET_EMAILVERIFY_TEMPLATE_ID : int = 6932923
     MAILJET_PASSWORDRESET_TEMPLATE_ID : int = 6932939

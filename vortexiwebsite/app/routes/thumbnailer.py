@@ -441,7 +441,7 @@ def TakeThumbnail(AssetId : int, isIcon = False, bypassCooldown = False, bypassC
         AllPackageAssets : list[PackageAsset] = PackageAsset.query.filter_by(package_asset_id=AssetId).all()
         AssetId = ""
         for i in range(len(AllPackageAssets)):
-            AssetId += f"https://www.vortexi.cc/asset/?id={str(AllPackageAssets[i].asset_id)}"
+            AssetId += f"https://www.kronus.co/asset/?id={str(AllPackageAssets[i].asset_id)}"
             if i != len(AllPackageAssets) - 1:
                 AssetId += ";"
     try:

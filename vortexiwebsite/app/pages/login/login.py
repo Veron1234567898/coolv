@@ -369,7 +369,7 @@ def reset_password_post():
                 {
                     "From": {
                         "Email": Config.MAILJET_NOREPLY_SENDER,
-                        "Name": "vortexi.cc"
+                        "Name": "kronus.co"
                     },
                     "To": [
                         {

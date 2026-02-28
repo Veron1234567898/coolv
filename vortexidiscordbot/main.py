@@ -31,8 +31,8 @@ async def BuildUserEmbed( UserObject: dict ) -> discord.Embed:
     UserEmbed.title = UserObject["username"]
     UserEmbed.description = nowidthspace.join(UserObject["description"]) + nowidthspace
     UserEmbed.color = discord.Color.green()
-    UserEmbed.url = f"https://www.vortexi.cc/users/{UserObject['id']}/profile"
-    UserEmbed.set_thumbnail(url=f"https://www.vortexi.cc/Thumbs/Head.ashx?x=100&y=100&userId={UserObject['id']}")
+    UserEmbed.url = f"https://www.kronus.co/users/{UserObject['id']}/profile"
+    UserEmbed.set_thumbnail(url=f"https://www.kronus.co/Thumbs/Head.ashx?x=100&y=100&userId={UserObject['id']}")
     UserEmbed.add_field(name="UserId", value=UserObject["id"])
     UserEmbed.add_field(name="Created at", value=f"<t:{int(UserObject['created_at'])}:f>")
     UserEmbed.add_field(name="Last online", value=f"<t:{int(UserObject['last_online'])}:f>")
@@ -45,13 +45,13 @@ async def BuildItemEmbed( ItemObject: dict ) -> discord.Embed:
     ItemEmbed.title = ItemObject["name"]
     ItemEmbed.description = nowidthspace.join(ItemObject["description"]) + nowidthspace
     ItemEmbed.color = discord.Color.green()
-    ItemEmbed.url = f"https://www.vortexi.cc/catalog/{ItemObject['id']}/"
-    ItemEmbed.set_thumbnail(url=f"https://www.vortexi.cc/Thumbs/Asset.ashx?x=180&y=180&assetId={ItemObject['id']}")
+    ItemEmbed.url = f"https://www.kronus.co/catalog/{ItemObject['id']}/"
+    ItemEmbed.set_thumbnail(url=f"https://www.kronus.co/Thumbs/Asset.ashx?x=180&y=180&assetId={ItemObject['id']}")
     ItemEmbed.add_field(name="ItemId", value=ItemObject["id"])
     ItemEmbed.add_field(name="Created at", value=f"<t:{int(ItemObject['created_at'])}:f>")
     ItemEmbed.add_field(name="Updated at", value=f"<t:{int(ItemObject['updated_at'])}:f>")
     if ItemObject["creator"] != None:
-        ItemEmbed.add_field(name="Creator", value=f"[{ItemObject['creator']['username']}](https://www.vortexi.cc/users/{ItemObject['creator']['id']}/profile)")
+        ItemEmbed.add_field(name="Creator", value=f"[{ItemObject['creator']['username']}](https://www.kronus.co/users/{ItemObject['creator']['id']}/profile)")
     else:
         ItemEmbed.add_field(name="Creator", value="Group")
     if ItemObject["is_for_sale"]:

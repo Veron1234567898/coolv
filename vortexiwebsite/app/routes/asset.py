@@ -110,7 +110,7 @@ def characterFetch():
 
     user = User.query.filter_by(id=userId).first()
     if user is None:
-        return 'https://www.vortexi.cc/Asset/BodyColors.ashx?userId=5973;https://www.vortexi.cc/Asset/?id=23882;https://www.vortexi.cc/Asset/?id=28253;',200
+        return 'https://www.kronus.co/Asset/BodyColors.ashx?userId=5973;https://www.kronus.co/Asset/?id=23882;https://www.kronus.co/Asset/?id=28253;',200
     serverPlaceId = request.args.get('serverplaceid', default=None, type=int)
     
     avatar = UserAvatar.query.filter_by(user_id=userId).first()
@@ -1291,8 +1291,8 @@ def LegacyAssetSupport():
     except:
         pass
 
-    if AssetObj.asset_type in [AssetType.Shirt, AssetType.TShirt, AssetType.Pants]: # Fix a mistake I made awhile ago with Shirts, TShirts and Pants where the asset content URL was https://vortexi.cc/asset/?id= instead of http://www.vortexi.cc/asset/?id=
-        AssetVersonContent = AssetVersonContent.replace("https://vortexi.cc/asset/?id=".encode("utf-8"), "http://www.vortexi.cc/asset/?id=".encode("utf-8"))
+    if AssetObj.asset_type in [AssetType.Shirt, AssetType.TShirt, AssetType.Pants]: # Fix a mistake I made awhile ago with Shirts, TShirts and Pants where the asset content URL was https://kronus.co/asset/?id= instead of http://www.kronus.co/asset/?id=
+        AssetVersonContent = AssetVersonContent.replace("https://kronus.co/asset/?id=".encode("utf-8"), "http://www.kronus.co/asset/?id=".encode("utf-8"))
     
     if AssetObj.asset_type in [AssetType.Hat, AssetType.HairAccessory, AssetType.FaceAccessory, AssetType.NeckAccessory, AssetType.ShoulderAccessory, AssetType.FrontAccessory, AssetType.BackAccessory, AssetType.WaistAccessory]:
         AssetVersonContent = AssetVersonContent.replace("Accessory".encode("utf-8"), "Hat".encode("utf-8")) # Shitty hack but I can't think of a better way to do it

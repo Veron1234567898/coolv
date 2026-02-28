@@ -144,8 +144,8 @@ async fn main() {
     }
 
     let args: Vec<String> = std::env::args().collect();
-    let base_url : &str = "vortexi.cc";
-    let mut setup_url : &str = "setup.vortexi.cc";
+    let base_url : &str = "kronus.co";
+    let mut setup_url : &str = "setup.kronus.co";
     let fallback_setup_url : &str = "d2f3pa9j0u8v6f.cloudfront.net";
     let mut bootstrapper_filename :&str = "VortexiPlayerLauncher.exe";
     #[cfg(not(target_os = "windows"))]
@@ -399,18 +399,18 @@ MimeType=x-scheme-handler/vortexi-player;", latest_bootstrapper_path.to_str().un
     }
 
     // Parse the arguments passed to the bootstrapper
-    // Looks something like "vortexi-player://1+launchmode:play+gameinfo:TICKET+placelauncherurl:https://vortexi.cc/Game/placelauncher.ashx?placeId=660&t=TICKET+k:l"
+    // Looks something like "vortexi-player://1+launchmode:play+gameinfo:TICKET+placelauncherurl:https://kronus.co/Game/placelauncher.ashx?placeId=660&t=TICKET+k:l"
     debug(&format!("Arguments Passed: {}", args.join(" ").bright_blue()));
     if args.len() == 1 {
         // Just open the website
         #[cfg(target_os = "windows")]
         {
-            std::process::Command::new("cmd").arg("/c").arg("start").arg("https://vortexi.cc/games").spawn().unwrap();
+            std::process::Command::new("cmd").arg("/c").arg("start").arg("https://kronus.co/games").spawn().unwrap();
             std::process::exit(0);
         }
         #[cfg(not(target_os = "windows"))]
         {
-            std::process::Command::new("xdg-open").arg("https://vortexi.cc/games").spawn().unwrap();
+            std::process::Command::new("xdg-open").arg("https://kronus.co/games").spawn().unwrap();
             std::process::exit(0);
         }
     }

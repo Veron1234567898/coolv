@@ -1,5 +1,5 @@
 class Config:
-    BaseURL = "https://www.vortexi.cc"
+    BaseURL = "https://www.kronus.co"
     AuthorizationToken = "AfterTheFate"
     CommPort = 3000
     RCCServicePath = "./RCCService/RCCService.exe"

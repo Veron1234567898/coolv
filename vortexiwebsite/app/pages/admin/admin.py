@@ -1022,7 +1022,7 @@ def LogModerationAction(
                 "type": "Image",
                 "view_name": "Awesome Shirt",
                 "source": "https://sussybakaamongus.s3.eu-north-1.amazonaws.com/",
-                "page": "https://www.vortexi.cc/catalog/1/",
+                "page": "https://www.kronus.co/catalog/1/",
                 "creator": User | Group
             }
         ]
@@ -1031,7 +1031,7 @@ def LogModerationAction(
     for asset in relatedAssets:
         fields.append({
             "name": asset["view_name"],
-            "value": f"Type: **{asset['type']}** - { 'AssetId' if asset['type'] != 'GroupIcon' else 'GroupId' }: **{asset['mainId']}** - Creator: [{ asset['creator'].username if isinstance(asset['creator'], User) else asset['creator'].name }](https://www.vortexi.cc/{ 'users/'+str(asset['creator'].id)+'/profile' if isinstance(asset['creator'], User) else 'groups/'+str(asset['creator'].id)+'/' }){ ' - Related AssetId: **' + str(asset['relatedId']) +'**' if asset['relatedId'] else ''} - [View]({asset['page']}){ ' - [Source](' + asset['source'] +')' if asset['source'] else ''}",
+            "value": f"Type: **{asset['type']}** - { 'AssetId' if asset['type'] != 'GroupIcon' else 'GroupId' }: **{asset['mainId']}** - Creator: [{ asset['creator'].username if isinstance(asset['creator'], User) else asset['creator'].name }](https://www.kronus.co/{ 'users/'+str(asset['creator'].id)+'/profile' if isinstance(asset['creator'], User) else 'groups/'+str(asset['creator'].id)+'/' }){ ' - Related AssetId: **' + str(asset['relatedId']) +'**' if asset['relatedId'] else ''} - [View]({asset['page']}){ ' - [Source](' + asset['source'] +')' if asset['source'] else ''}",
             "inline": False
         })
     
@@ -1043,7 +1043,7 @@ def LogModerationAction(
         "fields": fields,
         "author": {
             "name": Actor.username,
-            "icon_url": f"https://www.vortexi.cc/Thumbs/Head.ashx?x=48&y=48&userId={str(Actor.id)}"
+            "icon_url": f"https://www.kronus.co/Thumbs/Head.ashx?x=48&y=48&userId={str(Actor.id)}"
         },
         "footer": {
             "text": f"Vortexi - Moderation Logs"
@@ -1057,7 +1057,7 @@ def LogModerationAction(
                 json = {
                     "username": "Vortexi - Moderation Logs",
                     "embeds": [embed],
-                    "avatar_url": f"https://www.vortexi.cc/Thumbs/Head.ashx?x=48&y=48&userId={str(Actor.id)}"
+                    "avatar_url": f"https://www.kronus.co/Thumbs/Head.ashx?x=48&y=48&userId={str(Actor.id)}"
                 },
                 timeout = 15 # without timeout the thread will hang if request hangs
             )
@@ -1082,7 +1082,7 @@ def ApprovePendingGroupIcon( content_hash ):
             "type": "GroupIcon",
             "view_name": iconObj.group.name,
             "source": f"{config.CDN_URL}/{iconObj.content_hash}",
-            "page": f"https://www.vortexi.cc/groups/{str(iconObj.group.id)}/",
+            "page": f"https://www.kronus.co/groups/{str(iconObj.group.id)}/",
             "creator": iconObj.creator
         }])
         iconObj.moderation_status = 0
@@ -1106,7 +1106,7 @@ def DenyPendingGroupIcon( content_hash ):
             "type": "GroupIcon",
             "view_name": iconObj.group.name,
             "source": f"{config.CDN_URL}/{iconObj.content_hash}",
-            "page": f"https://www.vortexi.cc/groups/{str(iconObj.group.id)}/",
+            "page": f"https://www.kronus.co/groups/{str(iconObj.group.id)}/",
             "creator": iconObj.creator
         }])
         iconObj.moderation_status = 2
@@ -1136,7 +1136,7 @@ def ApprovePendingAsset(assetid):
         "type": "Asset",
         "view_name": AssetObj.name,
         "source": None,
-        "page": f"https://www.vortexi.cc/catalog/{str(AssetObj.id)}/",
+        "page": f"https://www.kronus.co/catalog/{str(AssetObj.id)}/",
         "creator": GetCreatorOfAsset(AssetObj)
     })
     # Get the AssetThumbnail
@@ -1150,7 +1150,7 @@ def ApprovePendingAsset(assetid):
                 "type": "AssetThumbnail",
                 "view_name": AssetObj.name,
                 "source": f"{config.CDN_URL}/{AssetThumbnailObj.content_hash}",
-                "page": f"https://www.vortexi.cc/catalog/{str(AssetObj.id)}/",
+                "page": f"https://www.kronus.co/catalog/{str(AssetObj.id)}/",
                 "creator": GetCreatorOfAsset(AssetObj)
             })
 
@@ -1167,7 +1167,7 @@ def ApprovePendingAsset(assetid):
                     "type": AssetObj.asset_type.name,
                     "view_name": ParentAsset.name,
                     "source": None,
-                    "page": f"https://www.vortexi.cc/catalog/{str(ParentAsset.id)}/",
+                    "page": f"https://www.kronus.co/catalog/{str(ParentAsset.id)}/",
                     "creator": GetCreatorOfAsset(AssetObj)
                 })
             # Get the AssetThumbnail
@@ -1181,7 +1181,7 @@ def ApprovePendingAsset(assetid):
                         "type": "AssetThumbnail",
                         "view_name": ParentAsset.name,
                         "source": f"{config.CDN_URL}/{ParentAssetThumbnail.content_hash}",
-                        "page": f"https://www.vortexi.cc/catalog/{str(ParentAsset.id)}/",
+                        "page": f"https://www.kronus.co/catalog/{str(ParentAsset.id)}/",
                         "creator": GetCreatorOfAsset(AssetObj)
                     })
     LogModerationAction(auth.GetCurrentUser(), isApproved=True, relatedAssets=RelatedAssets)
@@ -1211,7 +1211,7 @@ def DeclinePendingAsset(assetid):
         "type": "Asset",
         "view_name": AssetObj.name,
         "source": None,
-        "page": f"https://www.vortexi.cc/catalog/{str(AssetObj.id)}/",
+        "page": f"https://www.kronus.co/catalog/{str(AssetObj.id)}/",
         "creator": GetCreatorOfAsset(AssetObj)
     })
     # Get the AssetThumbnail
@@ -1225,7 +1225,7 @@ def DeclinePendingAsset(assetid):
                 "type": "AssetThumbnail",
                 "view_name": AssetObj.name,
                 "source": f"{config.CDN_URL}/{AssetThumbnailObj.content_hash}",
-                "page": f"https://www.vortexi.cc/catalog/{str(AssetObj.id)}/",
+                "page": f"https://www.kronus.co/catalog/{str(AssetObj.id)}/",
                 "creator": GetCreatorOfAsset(AssetObj)
             })
 
@@ -1242,7 +1242,7 @@ def DeclinePendingAsset(assetid):
                     "type": AssetObj.asset_type.name,
                     "view_name": ParentAsset.name,
                     "source": None,
-                    "page": f"https://www.vortexi.cc/catalog/{str(ParentAsset.id)}/",
+                    "page": f"https://www.kronus.co/catalog/{str(ParentAsset.id)}/",
                     "creator": GetCreatorOfAsset(AssetObj)
                 })
             # Get the AssetThumbnail
@@ -1255,7 +1255,7 @@ def DeclinePendingAsset(assetid):
                     "type": "AssetThumbnail",
                     "view_name": ParentAsset.name,
                     "source": f"{config.CDN_URL}/{ParentAssetThumbnail.content_hash}",
-                    "page": f"https://www.vortexi.cc/catalog/{str(ParentAsset.id)}/",
+                    "page": f"https://www.kronus.co/catalog/{str(ParentAsset.id)}/",
                     "creator": GetCreatorOfAsset(AssetObj)
                 })
     LogModerationAction(auth.GetCurrentUser(), isApproved=False, relatedAssets=RelatedAssets)
@@ -1287,7 +1287,7 @@ def ApprovePendingIcon(assetid):
         "type": "PlaceIcon",
         "view_name": PlaceAssetObj.name,
         "source": f"{config.CDN_URL}/{PlaceIconObj.contenthash}",
-        "page": f"https://www.vortexi.cc/games/{str(PlaceAssetObj.id)}/",
+        "page": f"https://www.kronus.co/games/{str(PlaceAssetObj.id)}/",
         "creator": GetCreatorOfAsset(PlaceAssetObj)
     }])
     db.session.commit()
@@ -1312,7 +1312,7 @@ def DeclinePendingIcon(assetid):
         "type": "PlaceIcon",
         "view_name": PlaceIconObj.asset.name,
         "source": f"{config.CDN_URL}/{PlaceIconObj.contenthash}",
-        "page": f"https://www.vortexi.cc/games/{str(PlaceIconObj.placeid)}/",
+        "page": f"https://www.kronus.co/games/{str(PlaceIconObj.placeid)}/",
         "creator": GetCreatorOfAsset(PlaceIconObj.asset)
     }])
     db.session.commit()
@@ -1337,7 +1337,7 @@ def ApprovePendingThumbnail(thumbnailid : int):
         "type": "AssetThumbnail",
         "view_name": AssetThumbnailObj.asset.name,
         "source": f"{config.CDN_URL}/{AssetThumbnailObj.content_hash}",
-        "page": f"https://www.vortexi.cc/catalog/{str(AssetThumbnailObj.asset_id)}/",
+        "page": f"https://www.kronus.co/catalog/{str(AssetThumbnailObj.asset_id)}/",
         "creator": GetCreatorOfAsset(AssetThumbnailObj.asset)
     }])
     db.session.commit()
@@ -1362,7 +1362,7 @@ def DeclinePendingThumbnail(thumbnailid : int):
         "type": "AssetThumbnail",
         "view_name": AssetThumbnailObj.asset.name,
         "source": f"{config.CDN_URL}/{AssetThumbnailObj.content_hash}",
-        "page": f"https://www.vortexi.cc/catalog/{str(AssetThumbnailObj.asset_id)}/",
+        "page": f"https://www.kronus.co/catalog/{str(AssetThumbnailObj.asset_id)}/",
         "creator": GetCreatorOfAsset(AssetThumbnailObj.asset)
     }])
     db.session.commit()
@@ -1703,7 +1703,7 @@ def LogUserBanAction( BannedUser : User, Actor : User, BanObject : UserBan ):
         ],
         "author": {
             "name": BannedUser.username,
-            "icon_url": f"https://www.vortexi.cc/Thumbs/Head.ashx?x=48&y=48&userId={str(BannedUser.id)}"
+            "icon_url": f"https://www.kronus.co/Thumbs/Head.ashx?x=48&y=48&userId={str(BannedUser.id)}"
         },
         "footer": {
             "text": "Vortexi - Moderation Logs"
@@ -1717,7 +1717,7 @@ def LogUserBanAction( BannedUser : User, Actor : User, BanObject : UserBan ):
                 json = {
                     "username": "Vortexi - Moderation Logs",
                     "embeds": [BanEmbed],
-                    "avatar_url": f"https://www.vortexi.cc/Thumbs/Head.ashx?x=48&y=48&userId={str(BannedUser.id)}"
+                    "avatar_url": f"https://www.kronus.co/Thumbs/Head.ashx?x=48&y=48&userId={str(BannedUser.id)}"
                 },
                 timeout = 15 # without timeout the thread will hang if request hangs
             )
@@ -1772,7 +1772,7 @@ def LogUserUnbanAction( TargetUser : User, Actor : User, BanObj : UserBan ):
         ],
         "author": {
             "name": TargetUser.username,
-            "icon_url": f"https://www.vortexi.cc/Thumbs/Head.ashx?x=48&y=48&userId={str(TargetUser.id)}"
+            "icon_url": f"https://www.kronus.co/Thumbs/Head.ashx?x=48&y=48&userId={str(TargetUser.id)}"
         },
         "footer": {
             "text": "Vortexi - Moderation Logs"
@@ -1787,7 +1787,7 @@ def LogUserUnbanAction( TargetUser : User, Actor : User, BanObj : UserBan ):
                 json = {
                     "username": "Vortexi - Moderation Logs",
                     "embeds": [BanEmbed],
-                    "avatar_url": f"https://www.vortexi.cc/Thumbs/Head.ashx?x=48&y=48&userId={str(TargetUser.id)}"
+                    "avatar_url": f"https://www.kronus.co/Thumbs/Head.ashx?x=48&y=48&userId={str(TargetUser.id)}"
                 },
                 timeout = 15 # without timeout the thread will hang if request hangs
             )
@@ -2612,7 +2612,7 @@ def LogAssetModerationAction( Actor : User, AssetObj : Asset ):
         EmbedObj = {
             "type": "rich",
             "title": "Asset Moderation",
-            "description": f"Asset [{AssetObj.id}](https://www.vortexi.cc/admin/moderate-asset/{AssetObj.id}) moderation status has been updated by **{Actor.username}** ({Actor.id})",
+            "description": f"Asset [{AssetObj.id}](https://www.kronus.co/admin/moderate-asset/{AssetObj.id}) moderation status has been updated by **{Actor.username}** ({Actor.id})",
             "color": StatusToColor[AssetObj.moderation_status]["color"],
             "fields": [
                 {
@@ -2628,7 +2628,7 @@ def LogAssetModerationAction( Actor : User, AssetObj : Asset ):
             ],
             "author": {
                 "name": Actor.username,
-                "icon_url": f"https://www.vortexi.cc/Thumbs/Head.ashx?x=48&y=48&userId={str(Actor.id)}"
+                "icon_url": f"https://www.kronus.co/Thumbs/Head.ashx?x=48&y=48&userId={str(Actor.id)}"
             },
             "footer": {
                 "text": "Vortexi - Moderation Logs"
@@ -2642,7 +2642,7 @@ def LogAssetModerationAction( Actor : User, AssetObj : Asset ):
                 json = {
                     "username": "Vortexi - Moderation Logs",
                     "embeds" : [EmbedObj],
-                    "avatar_url": f"https://www.vortexi.cc/Thumbs/Head.ashx?x=48&y=48&userId={str(Actor.id)}"
+                    "avatar_url": f"https://www.kronus.co/Thumbs/Head.ashx?x=48&y=48&userId={str(Actor.id)}"
                 },
                 timeout = 15 # without timeout the thread will hang if request hangs
             )

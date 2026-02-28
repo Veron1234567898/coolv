@@ -2,14 +2,14 @@ import xmltodict
 import json
 
 class RCCSOAPMessages():
-    GetAllJobsMsg = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:rob="http://vortexi.cc/">
+    GetAllJobsMsg = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:rob="http://kronus.co/">
    <soapenv:Header/>
    <soapenv:Body>
       <rob:GetAllJobs/>
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    OpenJobMsg = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:rob="http://vortexi.cc/">
+    OpenJobMsg = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:rob="http://kronus.co/">
    <soapenv:Header/>
    <soapenv:Body>
       <rob:OpenJob>
@@ -31,7 +31,7 @@ class RCCSOAPMessages():
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    BatchJobMsg = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:rob="http://vortexi.cc/">
+    BatchJobMsg = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:rob="http://kronus.co/">
    <soapenv:Header/>
    <soapenv:Body>
       <rob:BatchJob>
@@ -53,7 +53,7 @@ class RCCSOAPMessages():
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    CloseJobMsg = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:rob="http://vortexi.cc/">
+    CloseJobMsg = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:rob="http://kronus.co/">
    <soapenv:Header/>
    <soapenv:Body>
       <rob:CloseJob>
@@ -62,7 +62,7 @@ class RCCSOAPMessages():
    </soapenv:Body>
 </soapenv:Envelope>"""
 
-    ExecuteScriptMsg = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:rob="http://vortexi.cc/">
+    ExecuteScriptMsg = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:rob="http://kronus.co/">
    <soapenv:Header/>
    <soapenv:Body>
       <rob:Execute>
@@ -173,7 +173,7 @@ class RCCSOAPMessages():
                 "MaxGameInstances": 1,
                 "PreferredPlayerCapacity": MaxPlayers,
                 "UniverseId": PlaceId if UniverseId is None else UniverseId,
-                "BaseUrl": "vortexi.cc",
+                "BaseUrl": "kronus.co",
                 "MatchmakingContextId": 1,
                 "CreatorType": CreatorType,
                 "PlaceVersion": PlaceVersion,
@@ -181,7 +181,7 @@ class RCCSOAPMessages():
                 "PreferredPort": PortNumber,
                 "ApiKey": ApiKey,
                 "PlaceVisitAccessKey": "None",
-                "PlaceFetchUrl": f"https://www.vortexi.cc/asset/?id={str(PlaceId)}"
+                "PlaceFetchUrl": f"https://www.kronus.co/asset/?id={str(PlaceId)}"
             }
         })
 

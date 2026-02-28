@@ -4,4 +4,4 @@ BootstrapperRoute = Blueprint('BootstrapperRoute', __name__, template_folder='pa
 
 @BootstrapperRoute.route("/install/GetInstallerCdns.ashx", methods=["GET"])
 def getinstallercdns():
-    return "https://setup.vortexi.cc/"
+    return "https://setup.kronus.co/"

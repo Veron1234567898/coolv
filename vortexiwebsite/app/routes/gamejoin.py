@@ -550,7 +550,7 @@ def gamejoin_api_v1():
             "FollowUserId": 0,
             "BrowserTrackerId": 0,
             "UsePortraitMode": False,
-            "CharacterAppearance": f"http://www.vortexi.cc/v1/avatar-fetch?userId={str(AuthenticatedUser.id)}&placeId={str(requestedPlaceId)}",
+            "CharacterAppearance": f"http://www.kronus.co/v1/avatar-fetch?userId={str(AuthenticatedUser.id)}&placeId={str(requestedPlaceId)}",
             "GameId": PlaceServerObj.serverPlaceId,
             "RobloxLocale": "en_us",
             "GameLocale": "en_us",
@@ -571,9 +571,9 @@ def GenerateClientTicket( UserObj : User, JobId : str, CharacterURL : str = None
         if TicketVersion == 2:
             CharacterURL = str(UserObj.id)
         elif TicketVersion == 1:
-            CharacterURL = Config.BaseURL + "/Asset/CharacterFetch.ashx?userId=" + str(UserObj.id) # f"http://www.vortexi.cc/v1.1/avatar-fetch?userId={str(UserObj.id)}&placeId={str(PlaceId)}"
+            CharacterURL = Config.BaseURL + "/Asset/CharacterFetch.ashx?userId=" + str(UserObj.id) # f"http://www.kronus.co/v1.1/avatar-fetch?userId={str(UserObj.id)}&placeId={str(PlaceId)}"
         elif TicketVersion == 4:
-            CharacterURL = f"http://www.vortexi.cc/v1/avatar-fetch?userId={str(UserObj.id)}&placeId={str(PlaceId)}"
+            CharacterURL = f"http://www.kronus.co/v1/avatar-fetch?userId={str(UserObj.id)}&placeId={str(PlaceId)}"
     
     FirstTicketUnsigned = f"{str(UserObj.id)}\n{UserObj.username}\n{CharacterURL}\n{JobId}\n{str(CustomTimestamp)}"
     SignedFirstTicketRaw : bytes = signUTF8(FirstTicketUnsigned, formatAutomatically=False, addNewLine=False, useNewKey=(TicketVersion > 1))
@@ -672,7 +672,7 @@ def join():
         "FollowUserId": 0,
         "BrowserTrackerId": 0,
         "UsePortraitMode": False,
-        "CharacterAppearance": config.BaseURL + "/Asset/CharacterFetch.ashx?userId=" + str(UserObj.id) if PlaceObj.placeyear in [PlaceYear.Fourteen, PlaceYear.Sixteen] else ( f"http://www.vortexi.cc/v1.1/avatar-fetch?userId={str(UserObj.id)}&placeId={str(placeid)}" if PlaceObj.placeyear in [PlaceYear.Eighteen] else f"http://www.vortexi.cc/v1/avatar-fetch?userId={str(UserObj.id)}&placeId={str(placeid)}" ),
+        "CharacterAppearance": config.BaseURL + "/Asset/CharacterFetch.ashx?userId=" + str(UserObj.id) if PlaceObj.placeyear in [PlaceYear.Fourteen, PlaceYear.Sixteen] else ( f"http://www.kronus.co/v1.1/avatar-fetch?userId={str(UserObj.id)}&placeId={str(placeid)}" if PlaceObj.placeyear in [PlaceYear.Eighteen] else f"http://www.kronus.co/v1/avatar-fetch?userId={str(UserObj.id)}&placeId={str(placeid)}" ),
         "GameId": PlaceServerObj.serverPlaceId,
         "RobloxLocale": "en_us",
         "GameLocale": "en_us",

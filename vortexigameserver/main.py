@@ -351,7 +351,7 @@ def thumbnailQueueWorker( workerNumber: int ):
                             "PNG",
                             ThumbnailRequestInfo['image_x'],
                             ThumbnailRequestInfo['image_y'],
-                            "http://www.vortexi.cc/asset/?id=1785197",
+                            "http://www.kronus.co/asset/?id=1785197",
 
                         ]
                     }
@@ -453,7 +453,7 @@ def thumbnailQueueWorker( workerNumber: int ):
                             "PNG",
                             ThumbnailRequestInfo['image_x'],
                             ThumbnailRequestInfo['image_y'],
-                            "http://www.vortexi.cc/asset/?id=1785197",
+                            "http://www.kronus.co/asset/?id=1785197",
                             ""
                         ]
                     }
@@ -959,7 +959,7 @@ def Game():
     #  "creatorId": 1,
     #  "creatorType": 1,
     #  "useNewLoadFile": true
-    #  "loadfile_location": "https://www.vortexi.cc/game/gameserver2016.lua"
+    #  "loadfile_location": "https://www.kronus.co/game/gameserver2016.lua"
     # }
     try:
         GameOpenData = request.json

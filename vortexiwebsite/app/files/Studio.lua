@@ -1,5 +1,5 @@
 -- Setup studio cmd bar & load core scripts
-local baseUrl = "http://www.vortexi.cc"
+local baseUrl = "http://www.kronus.co"
 
 pcall(function() game:GetService("InsertService"):SetFreeModelUrl(baseUrl.."/Game/Tools/InsertAsset.ashx?type=fm&q=%s&pg=%d&rs=%d") end)
 pcall(function() game:GetService("InsertService"):SetFreeDecalUrl(baseUrl.."/Game/Tools/InsertAsset.ashx?type=fd&q=%s&pg=%d&rs=%d") end)

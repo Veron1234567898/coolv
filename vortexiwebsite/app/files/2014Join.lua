@@ -8,7 +8,7 @@ local joinResolved = false
 local playResolved = true
 local playStartTime = 0
 local player = nil
-local BaseURL = "http://www.vortexi.cc"
+local BaseURL = "http://www.kronus.co"
 local PlaceId = {PlaceId}
 
 settings()["Game Options"].CollisionSoundEnabled = true
@@ -327,5 +327,5 @@ coroutine.wrap(function()
 	game:GetService("Players"):SetChatStyle(Enum.ChatStyle[JSONResponse["ChatStyle"]])
 
 	pcall(function() game:SetScreenshotInfo("") end)
-	pcall(function() game:SetVideoInfo('<?xml version="1.0"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:yt="http://gdata.youtube.com/schemas/2007"><media:group><media:title type="plain"><![CDATA[ROBLOX Place]]></media:title><media:description type="plain"><![CDATA[ For more games visit http://www.vortexi.cc]]></media:description><media:category scheme="http://gdata.youtube.com/schemas/2007/categories.cat">Games</media:category><media:keywords>ROBLOX, video, free game, online virtual world</media:keywords></media:group></entry>') end)
+	pcall(function() game:SetVideoInfo('<?xml version="1.0"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:yt="http://gdata.youtube.com/schemas/2007"><media:group><media:title type="plain"><![CDATA[ROBLOX Place]]></media:title><media:description type="plain"><![CDATA[ For more games visit http://www.kronus.co]]></media:description><media:category scheme="http://gdata.youtube.com/schemas/2007/categories.cat">Games</media:category><media:keywords>ROBLOX, video, free game, online virtual world</media:keywords></media:group></entry>') end)
 end)()

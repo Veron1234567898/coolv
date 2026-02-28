@@ -9,7 +9,7 @@ end
 pcall(function()
 	local t = ElapsedTime()
 	local platform = settings().Diagnostics.OsPlatform
-	game:HttpGet("http://www.vortexi.cc/Game/JoinRate.ashx?st=0&i=0&p=-1&c=GameAppInit&r=Success&d=" .. (math.floor(t*1000)) .. "&ip=localhost&errorType=&platform=" .. platform, false)
+	game:HttpGet("http://www.kronus.co/Game/JoinRate.ashx?st=0&i=0&p=-1&c=GameAppInit&r=Success&d=" .. (math.floor(t*1000)) .. "&ip=localhost&errorType=&platform=" .. platform, false)
 end)
 
 pcall(function() game:SetPlaceID(-1, false) end)
@@ -32,7 +32,7 @@ pcall(function() settings().Physics.PhysicsEnvironmentalThrottle = Enum.Envirome
 
 function reportContentProvider(time, queueLength, blocking)
 	pcall(function()
-		game:HttpGet("http://www.vortexi.cc/Analytics/ContentProvider.ashx?t=" .. time .. "&ql=" .. queueLength, blocking)
+		game:HttpGet("http://www.kronus.co/Analytics/ContentProvider.ashx?t=" .. time .. "&ql=" .. queueLength, blocking)
 	end)
 end
 function reportCdn(blocking)
@@ -44,7 +44,7 @@ function reportCdn(blocking)
 		cdnSuccess = newCdnSuccess
 		cdnFailure = newCdnFailure
 		if successDelta > 0 or failureDelta > 0 then
-			game:HttpGet("http://www.vortexi.cc/Game/Cdn.ashx?source=client&success=" .. successDelta .. "&failure=" .. failureDelta, blocking)
+			game:HttpGet("http://www.kronus.co/Game/Cdn.ashx?source=client&success=" .. successDelta .. "&failure=" .. failureDelta, blocking)
 		end
 	end)
 end
@@ -58,7 +58,7 @@ function reportDuration(category, result, duration, blocking,errorType)
 	if stats().Network:getChildren()[2] ~= nil then
 		bytesReceived = stats().Network:getChildren()[2].Stats.totalBytesReceived:GetValue()
 	end
-	pcall(function() game:HttpGet("http://www.vortexi.cc/Game/JoinRate.ashx?st=0&i=0&p=-1&c=" .. category .. "&r=" .. result .. "&d=" .. (math.floor(duration*1000)) .. "&b=" .. bytesReceived .. "&ip=localhost&errorType=" .. errorType .. "&platform=" .. platform, blocking) end)
+	pcall(function() game:HttpGet("http://www.kronus.co/Game/JoinRate.ashx?st=0&i=0&p=-1&c=" .. category .. "&r=" .. result .. "&d=" .. (math.floor(duration*1000)) .. "&b=" .. bytesReceived .. "&ip=localhost&errorType=" .. errorType .. "&platform=" .. platform, blocking) end)
 end
 -- arguments ---------------------------------------
 local threadSleepTime = ...
@@ -92,26 +92,26 @@ local closeConnection = game.Close:connect(function()
 			reportDuration("GameDuration","Success", duration, true)
 		end
 		pcall(function() game:HttpGet("&disconnect=true", true) end)
-		if true then pcall(function() game:HttpPost("https://api.vortexi.cc/auth/invalidate", "invalidate") end) end
+		if true then pcall(function() game:HttpPost("https://api.kronus.co/auth/invalidate", "invalidate") end) end
 	end
 end)
 
 game:GetService("ChangeHistoryService"):SetEnabled(false)
 game:GetService("ContentProvider"):SetThreadPool(16)
-game:GetService("InsertService"):SetBaseSetsUrl("http://www.vortexi.cc/Game/Tools/InsertAsset.ashx?nsets=10&type=base")
-game:GetService("InsertService"):SetUserSetsUrl("http://www.vortexi.cc/Game/Tools/InsertAsset.ashx?nsets=20&type=user&userid=%d")
-game:GetService("InsertService"):SetCollectionUrl("http://www.vortexi.cc/Game/Tools/InsertAsset.ashx?sid=%d")
-game:GetService("InsertService"):SetAssetUrl("http://www.vortexi.cc/Asset/?id=%d")
-game:GetService("InsertService"):SetAssetVersionUrl("http://www.vortexi.cc/Asset/?assetversionid=%d")
+game:GetService("InsertService"):SetBaseSetsUrl("http://www.kronus.co/Game/Tools/InsertAsset.ashx?nsets=10&type=base")
+game:GetService("InsertService"):SetUserSetsUrl("http://www.kronus.co/Game/Tools/InsertAsset.ashx?nsets=20&type=user&userid=%d")
+game:GetService("InsertService"):SetCollectionUrl("http://www.kronus.co/Game/Tools/InsertAsset.ashx?sid=%d")
+game:GetService("InsertService"):SetAssetUrl("http://www.kronus.co/Asset/?id=%d")
+game:GetService("InsertService"):SetAssetVersionUrl("http://www.kronus.co/Asset/?assetversionid=%d")
 
-pcall(function() game:GetService("SocialService"):SetFriendUrl("http://www.vortexi.cc/Game/LuaWebService/HandleSocialRequest.ashx?method=IsFriendsWith&playerid=%d&userid=%d") end)
-pcall(function() game:GetService("SocialService"):SetBestFriendUrl("http://www.vortexi.cc/Game/LuaWebService/HandleSocialRequest.ashx?method=IsBestFriendsWith&playerid=%d&userid=%d") end)
-pcall(function() game:GetService("SocialService"):SetGroupUrl("http://www.vortexi.cc/Game/LuaWebService/HandleSocialRequest.ashx?method=IsInGroup&playerid=%d&groupid=%d") end)
-pcall(function() game:GetService("SocialService"):SetGroupRankUrl("http://www.vortexi.cc/Game/LuaWebService/HandleSocialRequest.ashx?method=GetGroupRank&playerid=%d&groupid=%d") end)
-pcall(function() game:GetService("SocialService"):SetGroupRoleUrl("http://www.vortexi.cc/Game/LuaWebService/HandleSocialRequest.ashx?method=GetGroupRole&playerid=%d&groupid=%d") end)
-pcall(function() game:GetService("GamePassService"):SetPlayerHasPassUrl("http://www.vortexi.cc/Game/GamePass/GamePassHandler.ashx?Action=HasPass&UserID=%d&PassID=%d") end)
-pcall(function() game:GetService("MarketplaceService"):SetProductInfoUrl("https://api.vortexi.cc/marketplace/productinfo?assetId=%d") end)
-pcall(function() game:GetService("MarketplaceService"):SetPlayerOwnsAssetUrl("https://api.vortexi.cc/ownership/hasasset?userId=%d&assetId=%d") end)
+pcall(function() game:GetService("SocialService"):SetFriendUrl("http://www.kronus.co/Game/LuaWebService/HandleSocialRequest.ashx?method=IsFriendsWith&playerid=%d&userid=%d") end)
+pcall(function() game:GetService("SocialService"):SetBestFriendUrl("http://www.kronus.co/Game/LuaWebService/HandleSocialRequest.ashx?method=IsBestFriendsWith&playerid=%d&userid=%d") end)
+pcall(function() game:GetService("SocialService"):SetGroupUrl("http://www.kronus.co/Game/LuaWebService/HandleSocialRequest.ashx?method=IsInGroup&playerid=%d&groupid=%d") end)
+pcall(function() game:GetService("SocialService"):SetGroupRankUrl("http://www.kronus.co/Game/LuaWebService/HandleSocialRequest.ashx?method=GetGroupRank&playerid=%d&groupid=%d") end)
+pcall(function() game:GetService("SocialService"):SetGroupRoleUrl("http://www.kronus.co/Game/LuaWebService/HandleSocialRequest.ashx?method=GetGroupRole&playerid=%d&groupid=%d") end)
+pcall(function() game:GetService("GamePassService"):SetPlayerHasPassUrl("http://www.kronus.co/Game/GamePass/GamePassHandler.ashx?Action=HasPass&UserID=%d&PassID=%d") end)
+pcall(function() game:GetService("MarketplaceService"):SetProductInfoUrl("https://api.kronus.co/marketplace/productinfo?assetId=%d") end)
+pcall(function() game:GetService("MarketplaceService"):SetPlayerOwnsAssetUrl("https://api.kronus.co/ownership/hasasset?userId=%d&assetId=%d") end)
 pcall(function() game:SetCreatorID(0, Enum.CreatorType.User) end)
 
 -- Bubble chat.  This is all-encapsulated to allow us to turn it off with a config setting
@@ -204,7 +204,7 @@ function onDisconnection(peer, lostConnection)
 		showErrorWindow("This game has shut down", "Kick", "Kick")
 	end
 	pcall(function() game:HttpGet("&disconnect=true", true) end)
-	if true then pcall(function() game:HttpPost("https://api.vortexi.cc/auth/invalidate", "invalidate") end) end
+	if true then pcall(function() game:HttpPost("https://api.kronus.co/auth/invalidate", "invalidate") end) end
 end
 
 function requestCharacter(replicator)
@@ -352,10 +352,10 @@ local success, err = pcall(function()
 
 	-- negotiate an auth token
 	if true then
-		pcall(function() game:HttpPost("https://api.vortexi.cc/auth/negotiate?ticket=", "negotiate") end)
+		pcall(function() game:HttpPost("https://api.kronus.co/auth/negotiate?ticket=", "negotiate") end)
 		delay(300, function()
 			while true do
-				pcall(function() game:HttpPost("https://api.vortexi.cc/auth/renew", "renew") end)
+				pcall(function() game:HttpPost("https://api.kronus.co/auth/renew", "renew") end)
 				wait(300)
 			end
 		end)
@@ -371,7 +371,7 @@ local success, err = pcall(function()
 	onPlayerAdded(player)
 	
 	pcall(function() player.Name = [========[Player]========] end)
-	player.CharacterAppearance = "http://www.vortexi.cc/Asset/CharacterFetch.ashx?userId=1"	
+	player.CharacterAppearance = "http://www.kronus.co/Asset/CharacterFetch.ashx?userId=1"	
 	if not test then visit:SetUploadUrl("")end
 	
 	analytics("Connect Client")
@@ -409,7 +409,7 @@ end
 ]]
 
 pcall(function() game:SetScreenshotInfo("") end)
-pcall(function() game:SetVideoInfo('<?xml version="1.0"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:yt="http://gdata.youtube.com/schemas/2007"><media:group><media:title type="plain"><![CDATA[ROBLOX Place]]></media:title><media:description type="plain"><![CDATA[ For more games visit http://www.vortexi.cc]]></media:description><media:category scheme="http://gdata.youtube.com/schemas/2007/categories.cat">Games</media:category><media:keywords>ROBLOX, video, free game, online virtual world</media:keywords></media:group></entry>') end)
+pcall(function() game:SetVideoInfo('<?xml version="1.0"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:yt="http://gdata.youtube.com/schemas/2007"><media:group><media:title type="plain"><![CDATA[ROBLOX Place]]></media:title><media:description type="plain"><![CDATA[ For more games visit http://www.kronus.co]]></media:description><media:category scheme="http://gdata.youtube.com/schemas/2007/categories.cat">Games</media:category><media:keywords>ROBLOX, video, free game, online virtual world</media:keywords></media:group></entry>') end)
 -- use single quotes here because the video info string may have unescaped double quotes
 --[[
 analytics("Join Finished")

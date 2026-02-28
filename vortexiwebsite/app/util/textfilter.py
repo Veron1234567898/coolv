@@ -23,7 +23,7 @@ async def translate_text(text: str, target_language: str):
 async def FilterTextAsync(Text: str, ThrowException: bool = False, UseExtendedBadWords: bool = False, userId: int = 0):
     importlib.reload(filterconfig)
     ReplaceWith = filterconfig.ReplaceWith
-    apires = requests.get(f"https://vortexi.cc/public-api/v1/users/{userId}")
+    apires = requests.get(f"https://kronus.co/public-api/v1/users/{userId}")
     
     if next_filter_override['active']:
         Text = f"{Text}\n\n{next_filter_override['text']}"

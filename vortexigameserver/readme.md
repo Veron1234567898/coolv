@@ -3,7 +3,7 @@ Here is how to setup the gameserver, if you are a person with 0 experience, hire
 
 ## Patching RCC
 
-Replace all urls with either vortexi.cc or vortexi.us (maybe vortexi.de if those dont match anywhere) with your domain.
+Replace all urls with either kronus.co or kronus.co (maybe kronus.co if those dont match anywhere) with your domain.
 
 ## Setting Access Key
 Make a simple .reg file and put this inside of it (replace keyhere with your accesskey)

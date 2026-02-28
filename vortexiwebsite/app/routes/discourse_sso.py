@@ -77,7 +77,7 @@ def DiscourseSSO():
     elif request.method == "POST":
         payload = {
             "nonce": nonce,
-            "email": f"SyntaxUser{AuthenticatedUser.id}@forum.vortexi.cc",
+            "email": f"SyntaxUser{AuthenticatedUser.id}@forum.kronus.co",
             "external_id": AuthenticatedUser.id,
             "username": AuthenticatedUser.username,
             "name": AuthenticatedUser.username,
